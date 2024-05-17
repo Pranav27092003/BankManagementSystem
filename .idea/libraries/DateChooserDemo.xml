@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="DateChooserDemo">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Java/jdk1.8.0_202/lib/jdatechooser_bin_doc_1_1_1/DateChooserDemo.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Java/jdk1.8.0_202/lib/jcalendar-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Java/jdk1.8.0_202/lib/mysql-connector-j-8.4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
