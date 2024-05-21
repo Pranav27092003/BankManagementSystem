@@ -120,6 +120,8 @@ public class SignupTwo extends JFrame implements ActionListener {
         aadharNumberTextFeild = new JTextField();
         aadharNumberTextFeild.setFont(new Font("Arial",Font.BOLD,14));
         aadharNumberTextFeild.setBounds(370,440,300,30);
+        aadharNumberTextFeild.addKeyListener(new NumericKeyListener());
+        aadharNumberTextFeild.addKeyListener(new MaxLengthKeyListener(12));
         add(aadharNumberTextFeild);
 
 

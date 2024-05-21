@@ -54,7 +54,7 @@ public class FastCash extends JFrame implements ActionListener {
         fiveThousand.addActionListener(this);
         image.add(fiveThousand);
 
-        tenThousand = new JButton(" Rs.10000");
+        tenThousand = new JButton("Rs.10000");
         tenThousand.setBounds(300, 436, 130, 25);
         tenThousand.addActionListener(this);
         image.add(tenThousand);
@@ -71,7 +71,7 @@ public class FastCash extends JFrame implements ActionListener {
         setTitle("");
         setSize(800, 800);
         setLocation(350, 0);
-//        setUndecorated(true);
+        setUndecorated(true);
         setVisible(true);
     }
 

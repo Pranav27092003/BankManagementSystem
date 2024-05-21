@@ -38,6 +38,8 @@ public class PinChange extends JFrame implements ActionListener {
         newpin = new JPasswordField(4);
         newpin.setBounds(310, 300, 150, 35);
         newpin.setFont(new Font("Raleway",Font.BOLD,20));
+        newpin.addKeyListener(new NumericKeyListener());
+        newpin.addKeyListener(new MaxLengthKeyListener(4));
         image.add(newpin);
 
         JLabel repintext = new JLabel("Re-Enter New Pin:");
@@ -49,6 +51,8 @@ public class PinChange extends JFrame implements ActionListener {
         renewpin = new JPasswordField(4);
         renewpin.setBounds(310, 350, 150, 35);
         renewpin.setFont(new Font("Raleway",Font.BOLD,20));
+        renewpin.addKeyListener(new NumericKeyListener());
+        renewpin.addKeyListener(new MaxLengthKeyListener(4));
         image.add(renewpin);
 
 
@@ -69,7 +73,7 @@ public class PinChange extends JFrame implements ActionListener {
         setTitle("");
         setSize(800, 800);
         setLocation(350, 0);
-//        setUndecorated(true);
+        setUndecorated(true);
         setVisible(true);
     }
 

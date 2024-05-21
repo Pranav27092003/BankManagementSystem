@@ -68,7 +68,7 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
         setTitle("");
         setSize(800, 800);
         setLocation(350, 0);
-//        setUndecorated(true);
+        setUndecorated(true);
         setVisible(true);
     }
 

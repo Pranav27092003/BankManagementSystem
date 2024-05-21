@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.util.*;
 
 
@@ -31,6 +32,7 @@ public class Withdrawl extends JFrame implements ActionListener {
         amount = new JTextField();
         amount.setFont(new Font("System",Font.BOLD,22));
         amount.setBounds(190,330,200,25);
+        amount.addKeyListener(new NumericKeyListener());
         image.add(amount);
 
         withdraw = new JButton("Withdraw");
@@ -50,7 +52,7 @@ public class Withdrawl extends JFrame implements ActionListener {
         setTitle("");
         setSize(800,800);
         setLocation(350, 0);
-//        setUndecorated(true);
+        setUndecorated(true);
         setVisible(true);
     }
 
@@ -68,6 +70,20 @@ public class Withdrawl extends JFrame implements ActionListener {
             }else {
                 try {
                     Conn conn = new Conn();
+                    ResultSet res = conn.s.executeQuery("select * from bank where pinNumber = '"+pinNumber+"'");
+
+                    int balance =0;
+                    while(res.next()){
+                        if (res.getString("type").equals("Deposit")){
+                            balance = balance + Integer.parseInt(res.getString("amount"));
+                        }else {
+                            balance = balance - Integer.parseInt(res.getString("amount"));
+                        }
+                    }
+                    if ((e.getSource() != back) && (balance < Integer.parseInt(number))){
+                        JOptionPane.showMessageDialog(null, "Insufficient Balance");
+                        return;
+                    }
                     String query = "insert into bank values('" + pinNumber + "', '" + date + "', 'Withdraw', '" + number + "')";
                     conn.s.executeUpdate(query);
                     JOptionPane.showMessageDialog(null, "Rs. " + number + "Withdrawl Successfully");
@@ -83,10 +99,6 @@ public class Withdrawl extends JFrame implements ActionListener {
             new Transactions(pinNumber).setVisible(true);
         }
 
-        try{
 
-        }catch(Exception ex){
-            System.out.println(ex);
-        }
     }
 }

@@ -31,6 +31,7 @@ public class Deposits extends JFrame implements ActionListener {
         amount = new JTextField();
         amount.setFont(new Font("System",Font.BOLD,22));
         amount.setBounds(190,330,200,25);
+        amount.addKeyListener(new NumericKeyListener());
         image.add(amount);
 
         deposit = new JButton("Deposit");
@@ -50,7 +51,7 @@ public class Deposits extends JFrame implements ActionListener {
         setTitle("");
         setSize(800,800);
         setLocation(350, 0);
-//        setUndecorated(true);
+        setUndecorated(true);
         setVisible(true);
     }
 

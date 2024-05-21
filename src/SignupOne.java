@@ -2,10 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
 
-public class SignupOne extends JFrame implements ActionListener {
+public class SignupOne extends JFrame implements ActionListener{
          long random;
          JTextField nameTextFeild, fnameTextFeild, emailTextFeild, addressTextFeild,cityTextFeild, stateTextFeild, pincodeTextFeild;
          JRadioButton male,female,other,married,unmarried,dontknow;
@@ -40,6 +42,7 @@ public class SignupOne extends JFrame implements ActionListener {
         nameTextFeild = new JTextField();
         nameTextFeild.setFont(new Font("Arial",Font.BOLD,14));
         nameTextFeild.setBounds(330,140,300,30);
+        nameTextFeild.addKeyListener(new AlphabetKeyListener());
         add(nameTextFeild);
 
         // label for fathers name
@@ -52,6 +55,7 @@ public class SignupOne extends JFrame implements ActionListener {
         fnameTextFeild = new JTextField();
         fnameTextFeild.setFont(new Font("Arial",Font.BOLD,14));
         fnameTextFeild.setBounds(330,190,300,30);
+        fnameTextFeild.addKeyListener(new AlphabetKeyListener());
         add(fnameTextFeild);
 
         // label for DOB
@@ -59,6 +63,12 @@ public class SignupOne extends JFrame implements ActionListener {
         dob.setFont(new Font("Raleway",Font.BOLD,20));
         dob.setBounds(100,240,200,30);
         add(dob);
+
+        // label for DOB
+        JLabel choose = new JLabel("(Choose from calendar)");
+        choose.setFont(new Font("Raleway",Font.BOLD,14));
+        choose.setBounds(630,240,200,30);
+        add(choose);
 
         // choosing date here
         datechooser = new JDateChooser();
@@ -164,6 +174,7 @@ public class SignupOne extends JFrame implements ActionListener {
         cityTextFeild = new JTextField();
         cityTextFeild.setFont(new Font("Arial",Font.BOLD,14));
         cityTextFeild.setBounds(330,490,300,30);
+        cityTextFeild.addKeyListener(new AlphabetKeyListener());
         add(cityTextFeild);
 
         // label for State
@@ -176,6 +187,7 @@ public class SignupOne extends JFrame implements ActionListener {
          stateTextFeild = new JTextField();
         stateTextFeild.setFont(new Font("Arial",Font.BOLD,14));
         stateTextFeild.setBounds(330,540,300,30);
+        stateTextFeild.addKeyListener(new AlphabetKeyListener());
         add(stateTextFeild);
 
         // label for pincode
@@ -188,6 +200,8 @@ public class SignupOne extends JFrame implements ActionListener {
         pincodeTextFeild = new JTextField();
         pincodeTextFeild.setFont(new Font("Arial",Font.BOLD,14));
         pincodeTextFeild.setBounds(330,590,300,30);
+        pincodeTextFeild.addKeyListener(new NumericKeyListener());
+        pincodeTextFeild.addKeyListener(new MaxLengthKeyListener(6));
         add(pincodeTextFeild);
 
         // Button
@@ -262,4 +276,6 @@ public class SignupOne extends JFrame implements ActionListener {
 
 
     }
+
+
 }
