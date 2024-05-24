@@ -11,7 +11,7 @@ public class SignupOne extends JFrame implements ActionListener{
          long random;
          JTextField nameTextFeild, fnameTextFeild, emailTextFeild, addressTextFeild,cityTextFeild, stateTextFeild, pincodeTextFeild;
          JRadioButton male,female,other,married,unmarried,dontknow;
-         JButton next;
+         JButton next,back;
          JDateChooser datechooser;
 
     SignupOne(){
@@ -213,6 +213,15 @@ public class SignupOne extends JFrame implements ActionListener{
         next.addActionListener(this);
         add(next);
 
+        // Button
+        back = new JButton("BACK");
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        back.setFont(new Font("Raleway",Font.BOLD,14));
+        back.setBounds(120,640,100,30);
+        back.addActionListener(this);
+        add(back);
+
         // frame settings
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -256,18 +265,27 @@ public class SignupOne extends JFrame implements ActionListener{
             maritialStatus = "Other";
         }
 
+        if(e.getSource()== back){
+            setVisible(false);
+            new Login().setVisible(true);
+        }else{
+            setVisible(true);
+        }
+
         try{
-            if(name.equals("")){
+
+            if(name.equals("") && e.getSource()!= back){
                 JOptionPane.showMessageDialog(null, "Name is required");
-            }else{
-                Conn c =new Conn();
-                String query = "insert into signup values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"', '"+maritialStatus+"','"+address+"','"+city+"','"+state+"', '"+pinCode+"')";
+            }else {
+                Conn c = new Conn();
+                String query = "insert into signup values('" + formno + "','" + name + "','" + fname + "','" + dob + "','" + gender + "','" + email + "', '" + maritialStatus + "','" + address + "','" + city + "','" + state + "', '" + pinCode + "')";
                 c.s.executeUpdate(query);
 
                 setVisible(false);
-                new SignupTwo(formno).setVisible(true);
+                if (e.getSource() != back) {
+                    new SignupTwo(formno).setVisible(true);
+                }
             }
-
         }catch(Exception ex){
             System.out.println(ex);
         }

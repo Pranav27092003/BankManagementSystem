@@ -7,7 +7,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
     JTextField panNumberTextFeild, aadharNumberTextFeild;
     JRadioButton yes,no,ha,na;
-    JButton next;
+    JButton next,back;
     JComboBox religionComboBox, categoryComboBox, incomeComboBox, occupationComboBox, educationComboBox;
     String formno;
 
@@ -191,6 +191,16 @@ public class SignupTwo extends JFrame implements ActionListener {
         next.addActionListener(this);
         add(next);
 
+
+        // Button
+        back = new JButton("BACK");
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        back.setFont(new Font("Raleway",Font.BOLD,14));
+        back.setBounds(120,590,100,30);
+        back.addActionListener(this);
+        add(back);
+
         // frame settings
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -226,18 +236,27 @@ public class SignupTwo extends JFrame implements ActionListener {
         }else if(na.isSelected()){
             existing = "No";
         }
+
+
+        if(e.getSource()== back){
+            setVisible(false);
+            new SignupOne().setVisible(true);
+        }else{
+            setVisible(true);
+        }
         try{
-            if(religion.equals("")){
+            if(religion.equals("") && e.getSource()!= back){
                 JOptionPane.showMessageDialog(null, "Select religion");
-            }else{
-                Conn c =new Conn();
-                String query = "insert into signuptwo values('"+formno+"','"+religion+"','"+category+"','"+ income +"','"+education+"','"+occupation+"','"+panNumber+"', '"+aadharNumber+"','"+senior+"','"+existing+"')";
+            }else {
+                Conn c = new Conn();
+                String query = "insert into signuptwo values('" + formno + "','" + religion + "','" + category + "','" + income + "','" + education + "','" + occupation + "','" + panNumber + "', '" + aadharNumber + "','" + senior + "','" + existing + "')";
                 c.s.executeUpdate(query);
 
                 setVisible(false);
-                new SignupThree(formno).setVisible(true);
+                if (e.getSource() != back) {
+                    new SignupThree(formno).setVisible(true);
+                }
             }
-
         }catch(Exception ex){
             System.out.println(ex);
         }

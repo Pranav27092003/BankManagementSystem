@@ -9,7 +9,7 @@ public class SignupThree extends JFrame implements ActionListener {
 
     JRadioButton r1,r2,r3,r4;
     JCheckBox c1,c2,c3,c4,c5,c6,c7;
-    JButton submit,cancel;
+    JButton submit,cancel,back;
     String formno;
 
     SignupThree(String formno){
@@ -158,7 +158,7 @@ public class SignupThree extends JFrame implements ActionListener {
         submit.setForeground(Color.WHITE);
         submit.addActionListener(this);
         submit.setFont(new Font("Raleway",Font.BOLD,16));
-        submit.setBounds(160, 640,160,30);
+        submit.setBounds(340, 640,160,30);
         add(submit);
 
         // Making Buttons
@@ -167,10 +167,17 @@ public class SignupThree extends JFrame implements ActionListener {
         cancel.setForeground(Color.WHITE);
         cancel.addActionListener(this);
         cancel.setFont(new Font("Raleway",Font.BOLD,16));
-        cancel.setBounds(420, 640,160,30);
+        cancel.setBounds(540, 640,160,30);
         add(cancel);
 
-
+        // Making Buttons
+        back = new JButton("BACK");
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        back.addActionListener(this);
+        back.setFont(new Font("Raleway",Font.BOLD,16));
+        back.setBounds(140, 640,160,30);
+        add(back);
 
 
 
@@ -223,19 +230,24 @@ public class SignupThree extends JFrame implements ActionListener {
                     facility = facility + " E-Statement";
                 }
 
+
+
+
             try{
                 if(accountType.equals("")){
                     JOptionPane.showMessageDialog(null, "Select Account Type");
-                }else{
-                    Conn c =new Conn();
-                    String query1 = "insert into signupthree values('"+formno+"','"+accountType+"','"+cardNumber+"','"+ pinNumber +"','"+facility+"')";
-                    String query2 = "insert into login values('"+formno+"','"+cardNumber+"','"+ pinNumber +"')";
+                }else {
+                    Conn c = new Conn();
+                    String query1 = "insert into signupthree values('" + formno + "','" + accountType + "','" + cardNumber + "','" + pinNumber + "','" + facility + "')";
+                    String query2 = "insert into login values('" + formno + "','" + cardNumber + "','" + pinNumber + "')";
                     c.s.executeUpdate(query1);
                     c.s.executeUpdate(query2);
 
-                    JOptionPane.showMessageDialog(null, "Card Number:"+ cardNumber + "\n Pin :" + pinNumber);
+                    JOptionPane.showMessageDialog(null, "Card Number:" + cardNumber + "\n Pin :" + pinNumber);
                     setVisible(false);
-                    new Login().setVisible(true);
+                    if (e.getSource() != back) {
+                        new Login().setVisible(true);
+                    }
                 }
 
             }catch(Exception ex){
@@ -245,6 +257,11 @@ public class SignupThree extends JFrame implements ActionListener {
         }else if (e.getSource() == cancel){
             setVisible(false);
             new Login().setVisible(true);
+        }else if(e.getSource()== back){
+            setVisible(false);
+            new SignupTwo(formno).setVisible(true);
+        }else{
+            setVisible(true);
         }
 
 
