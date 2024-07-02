@@ -196,7 +196,6 @@ public class SignupThree extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource()== submit){
                 String accountType = null;
                 if(r1.isSelected()){
@@ -215,26 +214,30 @@ public class SignupThree extends JFrame implements ActionListener {
 
 
 
-                String facility ="";
-                if(c1.isSelected()) {
-                    facility = facility + "ATM CARD";
-                } else if (c2.isSelected()) {
-                    facility = facility + "Internet Banking";
-                } else if (c3.isSelected()) {
-                    facility = facility + "Mobile Banking";
-                }else if (c4.isSelected()){
-                    facility = facility + "Email Alerts";
-                } else if (c5.isSelected()) {
-                    facility = facility + "Cheque Book";
-                } else if (c6.isSelected()) {
-                    facility = facility + " E-Statement";
-                }
-
+            StringBuilder facility = new StringBuilder();
+            if (c1.isSelected()) {
+                facility.append("ATM CARD, ");
+            }
+            if (c2.isSelected()) {
+                facility.append("Internet Banking, ");
+            }
+            if (c3.isSelected()) {
+                facility.append("Mobile Banking, ");
+            }
+            if (c4.isSelected()) {
+                facility.append("Email Alerts, ");
+            }
+            if (c5.isSelected()) {
+                facility.append("Cheque Book, ");
+            }
+            if (c6.isSelected()) {
+                facility.append("E-Statement, ");
+            }
 
 
 
             try{
-                if(accountType.equals("")){
+                if (accountType == null || accountType.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Select Account Type");
                 }else {
                     Conn c = new Conn();
